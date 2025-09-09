@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Despesas</title>
+    <link rel="stylesheet" href="../css/gestao_despesas.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+    <div class="right">
+        <div class="theme-toggler">
+            <span class="material-symbols-outlined active">light_mode</span>
+            <span class="material-symbols-outlined">dark_mode</span>
+        </div>
+    </div>
+    <div class="container">
+        <aside>
+            <div class="sidebar">
+                <div class="top">
+                    <div class="logo">
+                        <img src="../imagens/edm-logo.png" alt="Logo EDM">
+                    </div>
+                    <div class="close" id="close-btn">
+                        <span class="material-symbols-outlined">close</span>
+                    </div>
+                </div>
+                <a href="pag.html">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="#" class="active">
+                    <span class="material-symbols-outlined">person</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="./view_despesas.html">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <h3>Despesas</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-outlined">insights</span>
+                    <h3>Analytics</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-outlined">mail_outline</span>
+                    <h3>Messages</h3>
+                    <span class="message-count">26</span>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-outlined">inventory</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-outlined">add</span>
+                    <h3>Add Product</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-outlined">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <div class="top-bar">
+                <button id="menu-btn">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+            <h2>Adicionar Despesa</h2>
+            <form id="form-despesa" class="form-despesa">
+                <input type="hidden" id="id" name="id">
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <input type="text" id="descricao" name="descricao" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoria:</label>
+                    <select id="categoria" name="categoria">
+                        <option value="imoveis">Imóveis</option>
+                        <option value="equipamentos">Equipamentos</option>
+                        <option value="combustivel">Combustível</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="valor">Valor:</label>
+                    <input type="number" id="valor" name="valor" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantidade">Quandidade:</label>
+                    <input type="number" id="quantidade" name="quantidade" step=""0.01 required>
+                </div>
+                <div class="form-group">
+                    <label for="moeda">Moeda:</label>
+                    <select id="moeda" name="moeda">
+                        <option value="MZN">MZN</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="ZAR">ZAR</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taxa_cambio">Taxa de Câmbio:</label>
+                    <input type="number" id="taxa_cambio" name="taxa_cambio" step="0.0001">
+                </div>
+                <div class="form-group">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" required>
+                </div>
+                <div class="form-group">
+                    <label for="fornecedor">Fornecedor:</label>
+                    <input type="text" id="fornecedor" name="fornecedor">
+                </div>
+                <div class="form-group">
+                    <label for="responsavel">Responsável:</label>
+                    <input type="text" id="responsavel" name="responsavel">
+                </div>
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status">
+                        <option value="pendente">Pendente</option>
+                        <option value="aprovado">Aprovado</option>
+                        <option value="pago">Pago</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="documento_suporte">Documento Suporte:</label>
+                    <input type="text" id="documento_suporte" name="documento_suporte">
+                </div>
+                <button type="submit">Submeter</button>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#form-despesa").submit(function(e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+                let url = "../controladores/gestao_despesas.php";
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    success: function(response) {
+                        alert(response.message);
+                        if (response.success) {
+                            $("#form-despesa")[0].reset();
+                            $("#id").val("");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Erro:", error);
+                        alert("Ocorreu um erro ao processar a requisição.");
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="../js/index.js"></script>
+</body>
+</html>

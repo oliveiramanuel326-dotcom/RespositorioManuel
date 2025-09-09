@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,800;1,600&display=swap');
+
+/* --------------- ROOT VARIABLES ----------------- */
+:root {
+    --color-primary: #ff9d00;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: red;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce;
+    --color-dark: #363949;
+    --color-light: rgb(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+    
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+/* GLOBAL STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    user-select: none;
+    -webkit-user-select: none;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+table th, table td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid var(--color-light);
+}
+
+table th {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+table tbody tr:nth-child(even) {
+    background-color: var(--color-info-light);
+}
+
+table tbody tr:hover {
+    background-color: var(--color-light);
+}
+
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+    table th, table td {
+        padding: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    table th, table td {
+        padding: 0.6rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+}
+
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+    .container {
+        grid-template-columns: 12rem auto;
+    }
+    .form-despesa {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+    button {
+        grid-column: span 1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    aside .sidebar {
+        width: 100%;
+        position: relative;
+        display: none; /* Escondido por padrão em mobile */
+    }
+    main {
+        padding: 0.5rem;
+    }
+    .form-despesa {
+        gap: 0.5rem;
+    }
+}

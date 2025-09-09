@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Despesas</title>
+    <link rel="stylesheet" href="../css/view_despesas.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h2>Lista de Despesas</h2>
+    <a href="#">Baixar Ficheiro Excel</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+                <th>Valor</th>
+                <!--<th>Quantidade</th>-->
+                <th>Moeda</th>
+                <th>Valor (MZN)</th>
+                <th>Data</th>
+                <th>Fornecedor</th>
+                <th>Responsável</th>
+                <th>Status</th>
+                <th>Documento Suporte</th>
+            </tr>
+        </thead>
+        <tbody id="despesas-body">
+            <!-- Os dados das despesas serão carregados aqui -->
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            function carregarDespesas() {
+                $.getJSON("../controladores/get_despesas.php", function(data) {
+                    let linhas = "";
+                    data.despesas.forEach(function(d) {
+                        linhas += `<tr>
+                            <td>${d.id}</td>
+                            <td>${d.descricao}</td>
+                            <td>${d.categoria}</td>
+                            <td>${d.valor}</td>
+                            <td>${d.moeda}</td>
+                            <td>${d.valor_mzn}</td>
+                            <td>${d.data}</td>
+                            <td>${d.fornecedor}</td>
+                            <td>${d.responsavel}</td>
+                            <td>${d.status}</td>
+                            <td>${d.documento_suporte}</td>
+                        </tr>`;
+                    });
+                    $("#despesas-body").html(linhas);
+                });
+            }
+
+            carregarDespesas();
+        });
+    </script>
+
+</body>
+</html>
